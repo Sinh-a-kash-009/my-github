@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import toast from "react-hot-toast";
-// import { formatDate } from "../utils/functions";
+import { formatDate } from "../utils/function.js";
 
 const LikesPage = () => {
 	const [likes, setLikes] = useState([]);
 
-	// useEffect(() => {
-	// 	const getLikes = async () => {
-	// 		try {
-	// 			const res = await fetch("/api/users/likes", { credentials: "include" });
-	// 			const data = await res.json();
-	// 			if (data.error) throw new Error(data.error);
+	useEffect(() => {
+		const getLikes = async () => {
+			try {
+				const res = await fetch("/api/users/likes", { credentials: "include" });
+				const data = await res.json();
+				if (data.error) throw new Error(data.error);
 
-	// 			setLikes(data.likedBy);
-	// 		} catch (error) {
-	// 			toast.error(error.message);
-	// 		}
-	// 	};
-	// 	getLikes();
-	// }, []);
-	// console.log("likes:", likes);
+				setLikes(data.likedBy);
+			} catch (error) {
+				toast.error(error.message);
+			}
+		};
+		getLikes();
+	}, []);
+	console.log("likes:", likes);
 
 	return (
 		<div className='relative overflow-x-auto shadow-md rounded-lg px-4'>
